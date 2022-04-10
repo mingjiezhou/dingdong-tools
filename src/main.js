@@ -5,11 +5,14 @@ var options = {
   method: 'POST',
   url: 'https://maicai.api.ddxq.mobi/order/getMultiReserveTime',
   headers: {
+    // 参数根据自己手机抓包里的适配
   },
   form: {
+    // 参数根据自己手机抓包里的适配
   },
 }
 
+//BarkId 需要安装bark 后在自己app 里获取
 let curl =
   "curl 'https://api.day.app/${BarkId}/叮咚买菜有可用配送时段请尽快下单?sound=minuet'"
 
