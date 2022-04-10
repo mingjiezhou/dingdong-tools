@@ -1,7 +1,7 @@
-var request = require('request')
-var child_process = require('child_process')
+let request = require('request')
+let child_process = require('child_process')
 
-var options = {
+let options = {
   method: 'POST',
   url: 'https://maicai.api.ddxq.mobi/order/getMultiReserveTime',
   headers: {
@@ -20,8 +20,13 @@ function checkMultiReserveTime(times) {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
       request(options, function (error, response) {
-        if (error) throw new Error(error)
+        if (error) {
+          console.log(error)
+          reject()
+        }
+
         let res = JSON.parse(response.body).data[0].time[0].times
+        
         if (
           res.some(i => {
             return i.fullFlag == false
@@ -45,5 +50,7 @@ async function loop() {
     await checkMultiReserveTime(15 * 1000)
   }
 }
+
+
 console.log('正在检查是否有可用配送时段...')
 loop()
