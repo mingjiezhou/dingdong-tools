@@ -10,3 +10,5 @@
 1、通过抓包获取叮咚的 api 后，将curl 转化为 node request 形式的接口后，header 和 form 里的参数需要根据自己的app 里的进行修改
 
 2、barkId 要使用自己的，否则接受不到推送消息，bark 应用请后台常驻
+
+<img src="https://user-images.githubusercontent.com/37775265/162608928-8c64c606-03ff-4710-90f7-c61eea506a82.jpg" width=400/>
