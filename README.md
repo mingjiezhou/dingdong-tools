@@ -3,6 +3,8 @@
 ### 介绍
 叮咚买菜 可派送时间 监听 工具🔧
 
+[使用文档](https://github.com/mingjiezhou/notes/issues/10)
+
 当有 派送时间段时，通知消息到手机（只支持 ios）
 
 ### 注意点
