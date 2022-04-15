@@ -1,84 +1,44 @@
-var request = require('request')
-var child_process = require('child_process')
+let request = require('request')
+let child_process = require('child_process')
+let config = require('./config.js')
 
-var options = {
-  method: 'POST',
-  url: 'https://maicai.api.ddxq.mobi/order/getMultiReserveTime',
-  headers: {
-    Host: 'maicai.api.ddxq.mobi',
-    Referer: 'https://servicewechat.com/wx1e113254eda17715/422/page-frame.html',
-    Cookie: 'DDXQSESSID=911e13e5f3e937e749fc67ae37953fa7',
-    'User-Agent':
-      'Mozilla/5.0 (iPhone; CPU iPhone OS 15_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.0(0x18000022) NetType/4G Language/zh_CN',
-    'ddmc-city-number': '0101',
-    'ddmc-api-version': '9.49.2',
-    'ddmc-build-version': '2.82.0',
-    'ddmc-longitude': '121.351886',
-    'Content-Length': '2171',
-    'ddmc-latitude': '31.180198',
-    'ddmc-app-client-id': '4',
-    Connection: 'keep-alive',
-    'ddmc-uid': '6024eab82507db0001df2c65',
-    'Accept-Language': 'zh-cn',
-    'ddmc-channel': 'applet',
-    'ddmc-device-id': 'osP8I0ZBjDUhEunUe7N9uzd8eadE',
-    Accept: '*/*',
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'ddmc-station-id': '5b988449c0a1ea8f1c8b5a6b',
-    'ddmc-ip': '',
-    // 'Accept-Encoding': 'gzip, deflate, br',
-    'ddmc-os-version': '[object Undefined]',
-  },
-  form: {
-    uid: '6024eab82507db0001df2c65',
-    longitude: '121.351886',
-    latitude: '31.180198',
-    station_id: '5b988449c0a1ea8f1c8b5a6b',
-    city_number: '0101',
-    api_version: '9.49.2',
-    app_version: '2.82.0',
-    applet_source: '',
-    channel: 'applet',
-    app_client_id: '4',
-    sharer_uid: '',
-    s_id: '911e13e5f3e937e749fc67ae37953fa7',
-    openid: 'osP8I0ZBjDUhEunUe7N9uzd8eadE',
-    h5_source: '',
-    device_token:
-      'WHJMrwNw1k/F0qdLNvE01AWvIS0Q4A1YmwEF3N97L0MBl7ZD7oG3qEHftCYyGQXNFfIq3aU6/bpqSdJMkEPAvxVgF3SyAj1lqdCW1tldyDzmauSxIJm5Txg==1487582755342',
-    address_id: '6236f950a4d2230001d21140',
-    group_config_id: '',
-    products:
-      '[[{"type":1,"id":"5e8eebcd7cdbf013083016dd","price":"9.50","count":1,"description":"","sizes":[],"cart_id":"5e8eebcd7cdbf013083016dd","parent_id":"","parent_batch_type":-1,"category_path":"58f9d213936edfe4568b569a,58fbf4bf936edfe3568b5990","manage_category_path":"13,1184,1190","activity_id":"","sku_activity_id":"","conditions_num":"","product_name":"崇明西葫芦 350g/份","product_type":0,"small_image":"https://img.ddimg.mobi/product/66de071d1afb51587521029608.jpg!deliver.product.list","total_price":"9.50","origin_price":"9.50","total_origin_price":"9.50","no_supplementary_price":"9.50","no_supplementary_total_price":"9.50","size_price":"0.00","buy_limit":0,"price_type":0,"promotion_num":0,"instant_rebate_money":"0.00","is_invoice":1,"sub_list":[],"is_booking":0,"is_bulk":0,"view_total_weight":"份","net_weight":"350","net_weight_unit":"g","storage_value_id":0,"temperature_layer":"","sale_batches":{"batch_type":-1},"is_shared_station_product":0,"is_gift":0,"supplementary_list":[],"order_sort":1,"is_presale":0}]]',
-    isBridge: 'false',
-    nars: 'bb39647e9e7c2bc7cdcf316509b52ee9',
-    sesi: '58hAkPT906e2610380d1c05204a94865bf4770e',
-  },
-}
-
-let curl =
-  "curl 'https://api.day.app/zY3nQb3bwAVHfRYUBHU2wg/叮咚买菜有可用配送时段请尽快下单?sound=minuet'"
-
-let curl2 =
-  "curl 'https://api.day.app/ahKjmMwFGEXbcuQ5ZfARBN/叮咚买菜有可用配送时段请尽快下单?sound=minuet'"
+let curl = "curl https://api.day.app/zY3nQb3bwAVHfRYUBHU2wg/叮咚买菜有可用配送时段请尽快下单?sound=minuet"
 
 function checkMultiReserveTime(times) {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
-      request(options, function (error, response) {
-        if (error) throw new Error(error)
-        let res = JSON.parse(response.body).data[0].time[0].times
+      request(config['capacityConfig'], function (error, response) {
+        if (error) {
+          console.log('error:')
+          console.log(error)
+          reject()
+        }
+
+        let res = JSON.parse(response.body)
+
+        if (!res.success) {
+          if (res.code == '405') {
+            console.log(res)
+            console.log('请求失败， 10秒后将再次尝试')
+            return resolve()
+          }
+        }
+
+        if (!(res.data && res.data[0] && res.data[0].time[0] && res.data[0].time[0].times)) {
+          return console.log(res)
+        }
+
+        let times = res.data[0].time[0].times
+
         if (
-          res.some(i => {
+          times.some(i => {
             return i.fullFlag == false
           })
         ) {
           console.log('🎉 恭喜 发现可用的配送时段 请尽快下单!')
           child_process.exec(curl)
-          child_process.exec(curl2)
-
         } else {
-          console.log('当前无可用配送时段 15秒后再试...')
+          console.log('当前无可用配送时段 10秒后再试...')
         }
 
         resolve()
@@ -89,7 +49,7 @@ function checkMultiReserveTime(times) {
 
 async function loop() {
   while (true) {
-    await checkMultiReserveTime(15 * 1000)
+    await checkMultiReserveTime(10 * 1000)
   }
 }
 console.log('正在检查是否有可用配送时段...')
