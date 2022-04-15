@@ -2,7 +2,9 @@ let request = require('request')
 let child_process = require('child_process')
 let config = require('./config.js')
 
-let curl = "curl https://api.day.app/zY3nQb3bwAVHfRYUBHU2wg/叮咚买菜有可用配送时段请尽快下单?sound=minuet"
+// barkId 替换成自己的
+// 中文有可能乱码
+let curl = "curl https://api.day.app/{barkId}/叮咚买菜有可用配送时段请尽快下单?sound=minuet"
 
 function checkMultiReserveTime(times) {
   return new Promise(function (resolve, reject) {
