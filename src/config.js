@@ -56,4 +56,19 @@ module.exports = {
       sesi: '58hAkPT906e2610380d1c05204a94865bf4770e',
     },
   },
+  // 购物车配置
+  cardConfig: {
+    method: "GET",
+    url: "https://maicai.api.ddxq.mobi/cart/index?*******",
+    headers: {
+      // 参数 替换成自己抓包的
+      'Connection': 'keep-alive',
+      'content-type': 'application/json;charset=UTF-8',
+      'ddmc-channel': 'applet',
+      'ddmc-os-version': '[object Undefined]',
+      'ddmc-app-client-id': '4',
+      'Cookie': '*******',
+      'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.20(0x1800142b) NetType/4G Language/zh_CN',
+    },
+  },
 }
