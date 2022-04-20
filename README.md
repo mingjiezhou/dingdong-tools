@@ -14,3 +14,8 @@
 2、barkId 要使用自己的，否则接受不到推送消息，bark 应用请后台常驻
 
 <img src="https://user-images.githubusercontent.com/37775265/162608928-8c64c606-03ff-4710-90f7-c61eea506a82.jpg" width=400/>
+
+-- 更新
+
+3、main.js 只检查 运力，推送手机
+4、main-card.js 检查运力 和 购物车库存，当两者都满足时，才通知
