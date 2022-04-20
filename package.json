@@ -4,6 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node src/main.js",
+    "start:cart": "node src/main-cart.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
