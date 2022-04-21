@@ -5,7 +5,7 @@ let config = require('./config.js')
 // barkId 替换成自己的
 // 中文有可能乱码
 let barkId = '******'
-let curl = `curl https://api.day.app/${barkId}${encodeURIComponent('叮咚买菜有可用配送时段请尽快下单')}?sound=minuet`
+let curl = `curl https://api.day.app/${barkId}/${encodeURIComponent('叮咚买菜有可用配送时段请尽快下单')}?sound=minuet`
 let cycle = 10 // 调用频率 （比如 10 秒 1 次）
 
 function checkMultiReserveTime(times) {
