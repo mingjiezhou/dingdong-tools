@@ -2,7 +2,13 @@
 
 -- 更新
 
-[四月之声](./src/voice-of-shanhai/四月之声in%20Shanghai.mp4)
+4、meituan.js 叮咚风控升级、现增加支持 美团运力
+
+3、[四月之声](./src/voice-of-shanhai/四月之声in%20Shanghai.mp4)
+
+2、main-card.js 检查运力 和 购物车库存，当两者都满足时，才通知
+
+1、main.js 只检查 运力，通知手机
 
 ### 介绍
 叮咚买菜 可派送时间 监听 工具🔧
@@ -19,8 +25,3 @@
 
 <img src="https://user-images.githubusercontent.com/37775265/162608928-8c64c606-03ff-4710-90f7-c61eea506a82.jpg" width=400/>
 
--- 更新
-
-3、main.js 只检查 运力，通知手机
-
-4、main-card.js 检查运力 和 购物车库存，当两者都满足时，才通知

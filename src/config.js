@@ -1,13 +1,15 @@
 module.exports = {
   // headers 和 form 里的字段需要抓包替换成自己的
   // 运力接口配置
+
+  // 1、叮咚
   capacityConfig: {
     method: 'POST',
     url: 'https://maicai.api.ddxq.mobi/order/getMultiReserveTime',
     headers: {
       Host: 'maicai.api.ddxq.mobi',
       Referer: 'https://servicewechat.com/wx1e113254eda17715/422/page-frame.html',
-      Cookie: 'DDXQSESSID=911e13e5f3e937e749fc67ae37953fa79',
+      Cookie: 'DDXQSESSID=911e13e5f3e937e749fc67ae37953fa9',
       'User-Agent':
         'Mozilla/5.0 (iPhone; CPU iPhone OS 15_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.0(0x18000022) NetType/4G Language/zh_CN',
       'ddmc-city-number': '0101',
@@ -53,7 +55,6 @@ module.exports = {
       isBridge: 'false',
       nars: 'bb39647e9e7c2bc7cdcf316509b52ee9',
       sesi: '58hAkPT906e2610380d1c05204a94865bf4770e',
-      
     },
   },
 
@@ -65,4 +66,15 @@ module.exports = {
       // 参数 替换成自己抓包的
     },
   },
+
+  // 2、美团
+  meituanNotice: {
+    // url 根据抓包替换成自己所在的站点
+    // 118 代表你所在的 站点编号，需要通过抓包 获取你所在的站点编号 去替换，注意118 &poi=118&stockPois=118 三处需要替换
+    method: 'GET',
+    url: 'https://mall.meituan.com/api/c/poi/118/notice?uuid=1805465c9dcc8-93f09a12558fe0-0-5a900-1805465c9dc54&xuuid=1805465c9dcc8-93f09a12558fe0-0-5a900-1805465c9dc54&__reqTraceID=c88c301d-8a04-6c76-358b-c2471ce5f824&platform=ios&utm_medium=wxapp&brand=xiaoxiangmaicai&tenantId=1&utm_term=5.33.1&msgOpSource=2&poi=118&stockPois=118&ci=1&bizId=2&openId=oV_5G4wXrnpDWzzPA2OpxkkVlZrY&address_id=1950000008&sysName=iOS&sysVerion=15.4&app_tag=union&uci=1&userid=126711747',
+    headers: {},
+  },
+
+  meituanCapacity: {}
 }
